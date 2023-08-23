@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Playlist Migration Extension",
+    "version": "1.0",
+    "description": "Migrate playlists from Amazon Music to YouTube",
+    "permissions": ["activeTab", "storage"],
+    "icons": {
+      "48": "images/icon.png",
+      "128": "images/icon.png"
+    },
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://music.amazon.com/*"],
+        "js": ["content_scripts/amazon_music.js"],
+        "run_at": "document_end"
+      },
+      {
+        "matches": ["*://www.youtube.com/*"],
+        "js": ["content_scripts/youtube.js"],
+        "run_at": "document_end"
+      }
+    ],
+    "background": {
+      "service_worker": "background/background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "images/icon.png"
+    }
+  }
+  
